@@ -1,11 +1,14 @@
-import LoginPage from '../page-objects/loginPage.js'
+import LoginPage from '../page-objects/loginPage.js';
 
 describe('Login Page' , () => {
     const loginPage = new LoginPage();
 
     beforeEach(()=>{
-        loginPage.navigate();
-    })
+     cy.eyesOpen({appName: 'HackathonApp', batchName: 'HackathonApp Screenshots'})
+     loginPage.navigate();
+    });
+
+    afterEach(() => cy.eyesClose());
 
     it('Validate login page', () => {
         loginPage.validateLoginPage();

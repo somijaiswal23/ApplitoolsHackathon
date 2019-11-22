@@ -10,6 +10,7 @@ export default class LoginPage {
       * Validate the login page
     */
     validateLoginPage(){
+        cy.eyesCheckWindow('Login Page');
         cy.get('.auth-header').should('have.text', '\n        Login Form\n      ');
         cy.get(':nth-child(1) > label').should('have.text', 'Username');
         cy.get('form > :nth-child(2) > label').should('have.text', 'Password');
@@ -37,6 +38,7 @@ export default class LoginPage {
         cy.get('#password').clear();
         cy.get('#log-in').click();
         cy.get('.alert-warning').should('have.text', 'Both Username and Password must be present ');
+        cy.eyesCheckWindow('Login Page with no username and password error');
      }
 
      /**
@@ -48,6 +50,7 @@ export default class LoginPage {
         cy.get('#password').clear();
         cy.get('#log-in').click();
         cy.get('.alert-warning').should('have.text', 'Password must be present');
+        cy.eyesCheckWindow('Login Page with error for without any password');
      }
      /**
        * No username login
@@ -58,6 +61,7 @@ export default class LoginPage {
         cy.get('#password').type('Nikhil@15');
         cy.get('#log-in').click();
         cy.get('.alert-warning').should('have.text', 'Username must be present');
+        cy.eyesCheckWindow('Login Page with error for without any username');
      }
 
      /**
@@ -72,5 +76,6 @@ export default class LoginPage {
         cy.location().should((loc) => {
             expect(loc.pathname).to.eq('/hackathonApp.html');
         });
+        cy.eyesCheckWindow('After valid login');
      }
 }
